@@ -24,6 +24,7 @@ Add to /boot/config.txt the line:
 ```
 dtoverlay=w1-gpio
 ```
+Reboot.
 
 Load the module for DS18B20
 
@@ -32,12 +33,7 @@ modprobe w1-gpio
 modprobe w1-therm
 ```
 
-Check the path /sys/bus/w1/devices/
-
-```
-dtoverlay=w1-gpio
-```
-
+Check if in the path /sys/bus/w1/devices/ is present a new devices "28-....."
 
 Add to root crontab the line:
 
