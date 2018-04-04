@@ -1,18 +1,20 @@
 import RPi.GPIO as GPIO
 import os
+import glob
 import time
 
 fan_gpio = 18
 temp_min = 22
 temp_max = 25
 dev_path = '/sys/bus/w1/devices/'
-dev_name = '28-000005be78bb'
-dev_file = dev_path + dev_name + '/w1_slave'
+dev_name = glob.glob(dev_path + '28*')[0]
+dev_file = dev_name + '/w1_slave'
 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 
 GPIO.setmode(GPIO.BCM) 
+GPIO.setwarnings(False)
 GPIO.setup(fan_gpio, GPIO.OUT) 
 
 def get_temp():

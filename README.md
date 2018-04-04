@@ -33,9 +33,30 @@ modprobe w1-gpio
 modprobe w1-therm
 ```
 
+Install the rpi.gpio with apt-get
+
+```
+sudo apt-get update
+sudo apt-get install rpi.gpio
+```
+
 Check if in the path /sys/bus/w1/devices/ is present a new devices "28-....."
+
+Check if the temperature value is present
+
+```
+cat /sys/bus/w1/devices/28-*/w1_slave 
+```
+You can replace 28-* with your device ID ( es: *28-021432861fae* in my examples ) and the output need to similar to:
+
+```
+64 01 4b 46 7f ff 0c 10 01 : crc=01 YES
+64 01 4b 46 7f ff 0c 10 01 t=22250
+```
+The temperature recorded by DS18B20 is: t=22250 -> temperature = 22.250°C
 
 Add to root crontab the line:
 
 ```
 @reboot /path_fan_control/launcher.sh > /path_fan_control/launcher.log 2>&1
+```
